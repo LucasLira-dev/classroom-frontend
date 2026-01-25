@@ -3,7 +3,7 @@ import { mockSubjects } from "@/constants/mock-subjects";
 
 export const dataProvider: DataProvider = {
   getList: async <TData extends BaseRecord = BaseRecord>({resource}: GetListParams) : Promise<GetListResponse<TData>> => {
-    if (resource != "subjects") {
+    if (resource !== "subjects") {
       return {
         data: [] as TData[],
         total: 0

@@ -14,8 +14,8 @@ import { Badge } from "@/components/ui/badge";
 
 export default function SubjectsList(){
 
-    const [searchQuerie, setSearchQuerie] = useState("");
-    const [selectedDepartment, setSelectedDepartment] = useState("");
+    const [searchQuery, setSearchQuery] = useState("");
+    const [selectedDepartment, setSelectedDepartment] = useState("all");
 
     const departmentFilters = selectedDepartment === "all" ? [] : [
         {
@@ -25,11 +25,11 @@ export default function SubjectsList(){
         }
     ];
 
-    const searchFilters = searchQuerie ? [
+    const searchFilters = searchQuery ? [
         {
             field: 'name', 
             operator: 'contains' as const,
-            value: searchQuerie
+            value: searchQuery
         }
     ] : [];
 
@@ -62,7 +62,7 @@ export default function SubjectsList(){
                 accessorKey: "description",
                 size: 300,
                 header: () => <p className="column-title"> Description </p>,
-                cell: ({ getValue }) => <span className="truncate line-clamp-2"> {getValue<string>()} </span>,
+                cell: ({ getValue }) => <span className="line-clamp-2"> {getValue<string>()} </span>,
             }
         ], []),
         refineCoreProps: {
@@ -100,8 +100,8 @@ export default function SubjectsList(){
                             type="text"
                             placeholder="Search by name..."
                             className="pl-10 w-full"
-                            value={searchQuerie}
-                            onChange={(e)=> setSearchQuerie(e.target.value)}
+                            value={searchQuery}
+                            onChange={(e)=> setSearchQuery(e.target.value)}
                          />
                     </div>
 
