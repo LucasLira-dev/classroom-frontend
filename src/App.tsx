@@ -16,7 +16,6 @@ import Dashboard from "./pages/dashboard";
 import { BookOpen, Home } from "lucide-react";
 import { Layout } from "./components/refine-ui/layout/layout";
 import SubjectsList from "./pages/subjects/list";
-import { R } from "node_modules/react-router/dist/development/index-react-server-client-IoJGLOqV.d.mts";
 import SubjectsCreate from "./pages/subjects/create";
 
 function App() {
@@ -39,14 +38,14 @@ function App() {
                   {
                     "name": "dashboard",
                     "list": "/",
-                    "meta": { label: "home", icon: <Home /> }
+                    "meta": { label: "Home", icon: <Home /> }
                   },
                   {
                     "name": "subjects",
                     "list": "/subjects",
                     "create": "/subjects/create",
                     "show": "/subjects/show/:id",
-                    "meta": { label: "subjects", icon: <BookOpen /> }
+                    "meta": { label: "Subjects", icon: <BookOpen /> }
                   }
                 ]
               }
