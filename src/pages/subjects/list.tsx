@@ -4,7 +4,7 @@ import { Search } from "lucide-react";
 import { Input } from "@/components/ui/input";
 import { useMemo, useState } from "react";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
-import { DEPARTMENTS_OPTIONS } from "@/constants";
+import { DEPARTMENT_OPTIONS } from "@/constants";
 import { CreateButton } from "@/components/refine-ui/buttons/create";
 import { DataTable } from "@/components/refine-ui/data-table/data-table";
 import { useTable } from "@refinedev/react-table";
@@ -52,7 +52,7 @@ export default function SubjectsList(){
             },
             {
                 id: "department",
-                accessorKey: "department",
+                accessorKey: "department.name",
                 size: 150,
                 header: () => <p className="column-title ml-2"> Department </p>,
                 cell: ({ getValue }) => <Badge variant="secondary"> {getValue<string>()} </Badge>
@@ -92,6 +92,7 @@ export default function SubjectsList(){
             <h1 className="page-title"> Subjects </h1>
 
             <div className="intro-row">
+                <p>Quick access to essential metrics and management tools.</p>
                 <div className="actions-row">
                     <div className="search-field">
                         <Search className="search-icon"/>
@@ -120,7 +121,7 @@ export default function SubjectsList(){
                                     All Departments
                                 </SelectItem>
                                 {
-                                    DEPARTMENTS_OPTIONS.map(dept=>(
+                                    DEPARTMENT_OPTIONS.map(dept=>(
                                         <SelectItem
                                         key={dept.value}
                                         value={dept.value}>
