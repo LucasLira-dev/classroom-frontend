@@ -13,10 +13,12 @@ import { useNotificationProvider } from "./components/refine-ui/notification/use
 import { ThemeProvider } from "./components/refine-ui/theme/theme-provider";
 import { dataProvider } from "./providers/data";
 import Dashboard from "./pages/dashboard";
-import { BookOpen, Home } from "lucide-react";
+import { BookOpen, GraduationCap, Home } from "lucide-react";
 import { Layout } from "./components/refine-ui/layout/layout";
 import SubjectsList from "./pages/subjects/list";
 import SubjectsCreate from "./pages/subjects/create";
+import ClassListPage from "./pages/classes/list";
+import CreateClassPage from "./pages/classes/create";
 
 function App() {
   return (
@@ -46,6 +48,12 @@ function App() {
                     "create": "/subjects/create",
                     "show": "/subjects/show/:id",
                     "meta": { label: "Subjects", icon: <BookOpen /> }
+                  },
+                  {
+                    "name": "classes",
+                    "list": "/classes",
+                    "create": "/classes/create",
+                    "meta": { label: "Classes", icon: <GraduationCap /> }
                   }
                 ]
               }
@@ -60,6 +68,10 @@ function App() {
                   <Route path="subjects">
                     <Route index element={<SubjectsList />} />
                     <Route path="create" element={<SubjectsCreate />} />
+                  </Route>
+                  <Route path="classes">
+                    <Route index element={<ClassListPage />} />
+                    <Route path="create" element={<CreateClassPage />} />
                   </Route>
                 </Route>
               </Routes>
