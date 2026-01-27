@@ -47,7 +47,6 @@ export default function UploadWidget({ value = null, onChange, disabled = false 
                         publicId: result.info.public_id,
                     };
                     setPreview(payload);
-                    setDeleteToken(result.info.delete_token ?? null);
                     onChangeRef.current?.(payload);
                     }
                 });

@@ -1,6 +1,5 @@
 import { useForm } from "@refinedev/react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { Label } from "@/components/ui/label";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
@@ -29,7 +28,6 @@ import { useBack } from "@refinedev/core";
 import { Loader2 } from "lucide-react";
 import { classSchema } from "@/lib/schema";
 import UploadWidget from "@/components/upload-widget";
-import { appendErrors } from "react-hook-form";
 
 const ClassesCreate = () => {
   const back = useBack();
@@ -143,7 +141,7 @@ const ClassesCreate = () => {
                       <FormControl>
                         <UploadWidget
                         value={field.value ? { url: field.value, publicId: bannerPublicId ?? ''} : null}
-                        onChange={(file: any, field: any) => setBannerImage(file, field)}
+                        onChange={(file: any) => setBannerImage(file, field)}
                          />
                       </FormControl>
                       <FormMessage />
