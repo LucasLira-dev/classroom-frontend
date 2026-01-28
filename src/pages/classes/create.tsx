@@ -90,7 +90,7 @@ const ClassesCreate = () => {
 
   const bannerPublicId = form.watch("bannerCldPubId"); //isso atualiza automaticamente quando o campo muda
 
-  const setBannerImage = (file, field) => {
+  const setBannerImage = (file: any, field: any) => {
     if (file) {
       field.onChange(file.url);
       form.setValue("bannerCldPubId", file.publicId, {
