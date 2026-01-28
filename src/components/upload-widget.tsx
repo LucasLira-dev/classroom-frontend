@@ -1,13 +1,8 @@
-import { CLOUDINARY_CLOUD_NAME, CLOUDINARY_UPLOAD_PRESET, CLOUDINARY_UPLOAD_URL } from "@/constants";
+import { CLOUDINARY_CLOUD_NAME, CLOUDINARY_UPLOAD_PRESET } from "@/constants";
 import { UploadWidgetValue } from "@/types";
 import { UploadCloud } from "lucide-react";
 import { useEffect, useRef, useState } from "react";
-
-interface UploadWidgetProps {
-    value: { url: string; publicId: string } | null;
-    onChange: (file: any, field: any) => void;
-    disabled?: boolean;
-}
+import { UploadWidgetProps } from "@/types";
 
 export default function UploadWidget({ value = null, onChange, disabled = false }: UploadWidgetProps) {
 
