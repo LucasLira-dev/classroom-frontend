@@ -1,9 +1,10 @@
-import { Refine } from "@refinedev/core";
+import { Authenticated, Refine } from "@refinedev/core";
 import { DevtoolsPanel, DevtoolsProvider } from "@refinedev/devtools";
 import { RefineKbar, RefineKbarProvider } from "@refinedev/kbar";
 
 import routerProvider, {
   DocumentTitleHandler,
+  NavigateToResource,
   UnsavedChangesNotifier,
 } from "@refinedev/react-router";
 import { BrowserRouter, Outlet, Route, Routes } from "react-router";
@@ -17,16 +18,21 @@ import { BookOpen, GraduationCap, Home } from "lucide-react";
 import { Layout } from "./components/refine-ui/layout/layout";
 import SubjectsList from "./pages/subjects/list";
 import SubjectsCreate from "./pages/subjects/create";
-import ClassListPage from "./pages/classes/list";
-import CreateClassPage from "./pages/classes/create";
+import { Register } from "./pages/register";
+import { Login } from "./pages/login";
+import ClassesCreate from "./pages/classes/create";
+import ClassesList from "./pages/classes/list";
+import { authProvider } from "./providers/auth";
 
 function App() {
+
   return (
     <BrowserRouter>
       <RefineKbarProvider>
         <ThemeProvider>
           <DevtoolsProvider>
             <Refine
+              authProvider={authProvider}
               dataProvider={dataProvider}
               notificationProvider={useNotificationProvider()}
               routerProvider={routerProvider}
@@ -59,22 +65,40 @@ function App() {
               }
             >
               <Routes>
-                <Route element={
-                  <Layout>
-                    <Outlet />
-                  </Layout>
-                }>
+                <Route
+                  element={
+                    <Authenticated key="public-routes" fallback={<Outlet />}>
+                      <NavigateToResource fallbackTo="/" />
+                    </Authenticated>
+                  }
+                >
+                  <Route path="/login" element={<Login />} />
+                  <Route path="/register" element={<Register />} />
+                </Route>
+
+                <Route
+                  element={
+                    <Authenticated key="private-routes" fallback={<Login />}>
+                      <Layout>
+                        <Outlet />
+                      </Layout>
+                    </Authenticated>
+                  }
+                >
                   <Route path="/" element={<Dashboard />} />
+
                   <Route path="subjects">
                     <Route index element={<SubjectsList />} />
                     <Route path="create" element={<SubjectsCreate />} />
                   </Route>
+
                   <Route path="classes">
-                    <Route index element={<ClassListPage />} />
-                    <Route path="create" element={<CreateClassPage />} />
+                    <Route index element={<ClassesList />} />
+                    <Route path="create" element={<ClassesCreate />} />
                   </Route>
                 </Route>
               </Routes>
+
               <Toaster />
               <RefineKbar />
               <UnsavedChangesNotifier />

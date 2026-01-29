@@ -1,3 +1,3 @@
-export default function ClassListPage() {
+export default function ClassesList() {
   return <div>Class List Page</div>;
 }
