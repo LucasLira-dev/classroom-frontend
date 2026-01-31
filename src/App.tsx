@@ -23,6 +23,7 @@ import { Login } from "./pages/login";
 import ClassesCreate from "./pages/classes/create";
 import ClassesList from "./pages/classes/list";
 import { authProvider } from "./providers/auth";
+import ClassesShow from "./pages/classes/show";
 
 function App() {
 
@@ -59,6 +60,7 @@ function App() {
                     "name": "classes",
                     "list": "/classes",
                     "create": "/classes/create",
+                    "show": "/classes/show/:id",
                     "meta": { label: "Classes", icon: <GraduationCap /> }
                   }
                 ]
@@ -95,6 +97,7 @@ function App() {
                   <Route path="classes">
                     <Route index element={<ClassesList />} />
                     <Route path="create" element={<ClassesCreate />} />
+                    <Route path="show/:id" element={<ClassesShow />} />
                   </Route>
                 </Route>
               </Routes>

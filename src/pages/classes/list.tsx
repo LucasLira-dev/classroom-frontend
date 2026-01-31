@@ -4,7 +4,6 @@ import { Search } from "lucide-react";
 import { Input } from "@/components/ui/input";
 import { useMemo, useState } from "react";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
-import { DEPARTMENT_OPTIONS } from "@/constants";
 import { CreateButton } from "@/components/refine-ui/buttons/create";
 import { DataTable } from "@/components/refine-ui/data-table/data-table";
 import { useTable } from "@refinedev/react-table";;
