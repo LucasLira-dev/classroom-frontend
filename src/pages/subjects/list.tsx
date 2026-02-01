@@ -11,6 +11,7 @@ import { useTable } from "@refinedev/react-table";
 import { Subject } from "@/types";
 import { ColumnDef } from "@tanstack/react-table";
 import { Badge } from "@/components/ui/badge";
+import { ShowButton } from "@/components/refine-ui/buttons/show";
 
 export default function SubjectsList(){
 
@@ -63,7 +64,22 @@ export default function SubjectsList(){
                 size: 300,
                 header: () => <p className="column-title"> Description </p>,
                 cell: ({ getValue }) => <span className="line-clamp-2"> {getValue<string>()} </span>,
-            }
+            },
+            {
+              id: "details",
+              size: 140,
+              header: () => <p className="column-title">Details</p>,
+              cell: ({ row }) => (
+                <ShowButton
+                  resource="subjects"
+                  recordItemId={row.original.id}
+                  variant="outline"
+                  size="sm"
+                >
+                  View
+                </ShowButton>
+              ),
+            },
         ], []),
         refineCoreProps: {
             resource: "subjects",

@@ -24,6 +24,7 @@ import ClassesCreate from "./pages/classes/create";
 import ClassesList from "./pages/classes/list";
 import { authProvider } from "./providers/auth";
 import ClassesShow from "./pages/classes/show";
+import SubjectsShow from "./pages/subjects/show";
 
 function App() {
 
@@ -92,6 +93,7 @@ function App() {
                   <Route path="subjects">
                     <Route index element={<SubjectsList />} />
                     <Route path="create" element={<SubjectsCreate />} />
+                    <Route path="show/:id" element={<SubjectsShow />} />
                   </Route>
 
                   <Route path="classes">
