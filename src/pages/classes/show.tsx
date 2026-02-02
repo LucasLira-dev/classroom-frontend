@@ -36,6 +36,7 @@ export default function ClassesShow() {
 
     const { query } = useShow<ClassDetails>({
         resource: "classes",
+        id: classId,
     })
 
     const classDetails = query.data?.data;
@@ -122,6 +123,8 @@ export default function ClassesShow() {
     const placeholderUrl = `https://placehold.co/600x400?text=${encodeURIComponent(
         teacherInitials || "NA"
     )}`;
+
+    console.log(classDetails);
     
 
     return (
@@ -168,7 +171,7 @@ export default function ClassesShow() {
                                 }
                                 data-status={classDetails.status}
                             >
-                                {classDetails.status.toUpperCase()}
+                                {classDetails.status}
                             </Badge>
                         </div>
                     </div>

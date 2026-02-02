@@ -14,7 +14,7 @@ import { useNotificationProvider } from "./components/refine-ui/notification/use
 import { ThemeProvider } from "./components/refine-ui/theme/theme-provider";
 import { dataProvider } from "./providers/data";
 import Dashboard from "./pages/dashboard";
-import { BookOpen, GraduationCap, Home } from "lucide-react";
+import { BookOpen, GraduationCap, Home, Users } from "lucide-react";
 import { Layout } from "./components/refine-ui/layout/layout";
 import SubjectsList from "./pages/subjects/list";
 import SubjectsCreate from "./pages/subjects/create";
@@ -25,6 +25,9 @@ import ClassesList from "./pages/classes/list";
 import { authProvider } from "./providers/auth";
 import ClassesShow from "./pages/classes/show";
 import SubjectsShow from "./pages/subjects/show";
+import FacultyList from "./pages/faculty/list";
+import { R } from "node_modules/react-router/dist/development/index-react-server-client-IoJGLOqV.d.mts";
+import FacultyShow from "./pages/faculty/show";
 
 function App() {
 
@@ -56,6 +59,12 @@ function App() {
                     "create": "/subjects/create",
                     "show": "/subjects/show/:id",
                     "meta": { label: "Subjects", icon: <BookOpen /> }
+                  },
+                  {
+                    "name": "users",
+                    "list": "/faculty",
+                    "show": "/faculty/show/:id",
+                    "meta": { label: "Faculty", icon: <Users /> }
                   },
                   {
                     "name": "classes",
@@ -94,6 +103,11 @@ function App() {
                     <Route index element={<SubjectsList />} />
                     <Route path="create" element={<SubjectsCreate />} />
                     <Route path="show/:id" element={<SubjectsShow />} />
+                  </Route>
+
+                  <Route path="faculty">
+                    <Route index element={<FacultyList />} />
+                    <Route path="show/:id" element={<FacultyShow />} />
                   </Route>
 
                   <Route path="classes">

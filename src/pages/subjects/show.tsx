@@ -5,7 +5,7 @@ import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Badge } from "@/components/ui/badge";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Subject } from "@/types";
-import { useLink, useMany, useShow } from "@refinedev/core";
+import { useLink, useShow } from "@refinedev/core";
 import { useTable } from "@refinedev/react-table";
 import { ColumnDef } from "@tanstack/react-table";
 import { useMemo } from "react";
@@ -44,6 +44,7 @@ export default function SubjectsShow(){
 
     const { query } = useShow<Subject>({
         resource: "subjects",
+        id: subjectId,
     })
 
     const subjectDetails = query.data?.data;

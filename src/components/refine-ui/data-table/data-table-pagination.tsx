@@ -25,7 +25,7 @@ type DataTablePaginationProps = {
   pageSize: number;
   setPageSize: (size: number) => void;
   total?: number;
-  variant: "default"
+  variant: "default" | "simple";
 };
 
 export function DataTablePagination({
