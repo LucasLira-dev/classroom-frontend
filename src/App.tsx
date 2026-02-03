@@ -14,7 +14,7 @@ import { useNotificationProvider } from "./components/refine-ui/notification/use
 import { ThemeProvider } from "./components/refine-ui/theme/theme-provider";
 import { dataProvider } from "./providers/data";
 import Dashboard from "./pages/dashboard";
-import { BookOpen, Building2, GraduationCap, Home, Users } from "lucide-react";
+import { BookOpen, Building2, ClipboardCheck, GraduationCap, Home, Users } from "lucide-react";
 import { Layout } from "./components/refine-ui/layout/layout";
 import SubjectsList from "./pages/subjects/list";
 import SubjectsCreate from "./pages/subjects/create";
@@ -30,6 +30,9 @@ import FacultyShow from "./pages/faculty/show";
 import DepartmentsList from "./pages/departments/list";
 import DepartmentsCreate from "./pages/departments/create";
 import DepartmentsShow from "./pages/departments/show";
+import CreateEnrollmentPage from "./pages/enrollments/create";
+import EnrollmentsConfirmPage from "./pages/enrollments/confirm";
+import EnrollmentJoinPage from "./pages/enrollments/join";
 
 function App() {
 
@@ -74,6 +77,12 @@ function App() {
                     "list": "/faculty",
                     "show": "/faculty/show/:id",
                     "meta": { label: "Faculty", icon: <Users /> }
+                  },
+                  {
+                    "name": "enrollments",
+                    "list": "/enrollments/create",
+                    "create": "/enrollments/create",
+                    "meta": { label: "Enrollments", icon: <ClipboardCheck /> }
                   },
                   {
                     "name": "classes",
@@ -123,6 +132,12 @@ function App() {
                   <Route path="faculty">
                     <Route index element={<FacultyList />} />
                     <Route path="show/:id" element={<FacultyShow />} />
+                  </Route>
+
+                  <Route path="enrollments">
+                    <Route path="create" element={<CreateEnrollmentPage />} />
+                    <Route path="join" element={<EnrollmentJoinPage />} />
+                    <Route path="confirm" element={<EnrollmentsConfirmPage />} />
                   </Route>
 
                   <Route path="classes">
