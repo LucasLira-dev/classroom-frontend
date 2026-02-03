@@ -2,7 +2,7 @@ import { AdvancedImage } from "@cloudinary/react";
 import { useTable } from "@refinedev/react-table";
 import { ColumnDef } from "@tanstack/react-table";
 import { useMemo } from "react";
-import { useParams } from "react-router";
+import { useNavigate, useParams } from "react-router";
 
 import { DataTable } from "@/components/refine-ui/data-table/data-table";
 import { ShowButton } from "@/components/refine-ui/buttons/show";
@@ -30,6 +30,8 @@ type ClassUser = {
 
 
 export default function ClassesShow() {
+
+    const navigate = useNavigate();
 
     const { id } = useParams();
     const classId = id ?? "";
@@ -228,7 +230,7 @@ export default function ClassesShow() {
                     </ol>
                 </div>
 
-                <Button size="lg" className="w-full">
+                <Button size="lg" className="w-full" onClick={() => navigate('/enrollments/join')}>
                     Join Class
                 </Button>
             </Card>
