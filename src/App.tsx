@@ -28,6 +28,8 @@ import SubjectsShow from "./pages/subjects/show";
 import FacultyList from "./pages/faculty/list";
 import FacultyShow from "./pages/faculty/show";
 import DepartmentsList from "./pages/departments/list";
+import DepartmentsCreate from "./pages/departments/create";
+import DepartmentsShow from "./pages/departments/show";
 
 function App() {
 
@@ -114,6 +116,8 @@ function App() {
 
                   <Route path="departments">
                     <Route index element={<DepartmentsList />} />
+                    <Route path="create" element={<DepartmentsCreate />} />
+                    <Route path="show/:id" element={<DepartmentsShow />} />
                   </Route>
 
                   <Route path="faculty">
