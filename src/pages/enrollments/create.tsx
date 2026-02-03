@@ -74,7 +74,7 @@ export default function CreateEnrollmentPage() {
             }
         });
 
-        navigate('enrollments/confirm', {
+        navigate('/enrollments/confirm', {
             state: { enrollment: response?.data },
         });
     }

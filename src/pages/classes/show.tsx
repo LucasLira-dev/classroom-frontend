@@ -123,10 +123,7 @@ export default function ClassesShow() {
     const placeholderUrl = `https://placehold.co/600x400?text=${encodeURIComponent(
         teacherInitials || "NA"
     )}`;
-
-    console.log(classDetails);
     
-
     return (
         <ShowView className="class-view class-show space-y-6">
             <ShowViewHeader resource="classes" title="Class Details" />
