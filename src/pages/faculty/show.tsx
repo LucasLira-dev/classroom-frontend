@@ -102,7 +102,18 @@ export default function FacultyShow() {
           accessorKey: 'department.name',
           size: 100,
           header: () => <p className="column-title"> Department </p>,
-          cell: ({ getValue }) => <p>{getValue<string>() || "N/A"}</p>,
+          cell: ({ row }) => {
+            const department = row.original.department;
+            if (!department) {
+              return <span className="text-muted-foreground">No department</span>;
+            }
+            return (
+              <span className="truncate">
+                {department.name}
+                {department.code ? ` (${department.code})` : ""}
+              </span>
+            );
+          },
         }, 
         {
           id: 'description',
@@ -152,7 +163,7 @@ export default function FacultyShow() {
     if (query.isLoading || query.isError || !user) {
         return (
             <ShowView className="class-view class-show space-y-6">
-                <ShowViewHeader resource="users" title="Department Details" />
+                <ShowViewHeader resource="users" title="User Details" />
                 <p className="state-message">
                     {query.isLoading ? "Loading user details..." : query.isError ? "Failed to load user details." : "User details not found."}
                 </p>

@@ -8,15 +8,18 @@ import { DEPARTMENT_OPTIONS } from "@/constants";
 import { CreateButton } from "@/components/refine-ui/buttons/create";
 import { DataTable } from "@/components/refine-ui/data-table/data-table";
 import { useTable } from "@refinedev/react-table";
-import { Subject } from "@/types";
+import { Subject, User } from "@/types";
 import { ColumnDef } from "@tanstack/react-table";
 import { Badge } from "@/components/ui/badge";
 import { ShowButton } from "@/components/refine-ui/buttons/show";
+import { useGetIdentity } from "@refinedev/core";
 
 export default function SubjectsList(){
 
     const [searchQuery, setSearchQuery] = useState("");
     const [selectedDepartment, setSelectedDepartment] = useState("all");
+
+    const { data: currentUser } = useGetIdentity<User>();
 
     const departmentFilters = selectedDepartment === "all" ? [] : [
         {
@@ -148,7 +151,11 @@ export default function SubjectsList(){
                             </SelectContent>
                         </Select>
 
-                        <CreateButton resource="subjects" />
+                        {
+                            currentUser?.role === 'teacher' && (
+                                <CreateButton resource="subjects" />
+                            )
+                        }
                     </div>
                 </div>
             </div>

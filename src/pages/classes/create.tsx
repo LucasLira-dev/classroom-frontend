@@ -24,15 +24,26 @@ import { CreateView } from "@/components/refine-ui/views/create-view";
 import { Breadcrumb } from "@/components/refine-ui/layout/breadcrumb";
 
 import { Textarea } from "@/components/ui/textarea";
-import { useBack, useList } from "@refinedev/core";
+import { useBack, useGetIdentity, useList } from "@refinedev/core";
 import { Loader2 } from "lucide-react";
 import { classSchema } from "@/lib/schema";
 import UploadWidget from "@/components/upload-widget";
 import { User, Subject } from "@/types";
 import z from "zod";
+import { useNavigate } from "react-router";
+import { useEffect } from "react";
 
 const ClassesCreate = () => {
   const back = useBack();
+  const navigate = useNavigate();
+
+  const { data: currentUser, isLoading: isUserLoading } = useGetIdentity<User>();
+  
+    useEffect(() => {
+      if (!isUserLoading && currentUser?.role === "student") {
+        navigate("/classes");
+      }
+    }, [currentUser, isUserLoading, navigate]);
 
   const form = useForm({
     resolver: zodResolver(classSchema),
@@ -91,7 +102,7 @@ const ClassesCreate = () => {
 
   const bannerPublicId = form.watch("bannerCldPubId"); //isso atualiza automaticamente quando o campo muda
 
-  const setBannerImage = (file: any, field: any) => {
+  const setBannerImage = (file: { url: string; publicId: string } | null, field: { onChange: (value: string) => void }) => {
     if (file) {
       field.onChange(file.url);
       form.setValue("bannerCldPubId", file.publicId, {
@@ -107,6 +118,17 @@ const ClassesCreate = () => {
       });
     }
   }
+
+  if (isUserLoading || currentUser?.role === "student") {
+      return (
+        <CreateView className="class-view">
+          <div className="flex items-center justify-center h-64">
+            <Loader2 className="h-8 w-8 animate-spin" />
+          </div>
+        </CreateView>
+      );
+    }
+  
 
   return (
     <CreateView className="class-view">
@@ -142,7 +164,7 @@ const ClassesCreate = () => {
                       <FormControl>
                         <UploadWidget
                         value={field.value ? { url: field.value, publicId: bannerPublicId ?? ''} : null}
-                        onChange={(file: any) => setBannerImage(file, field)}
+                        onChange={(file: { url: string; publicId: string } | null) => setBannerImage(file, field)}
                          />
                       </FormControl>
                       <FormMessage />

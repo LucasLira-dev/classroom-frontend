@@ -17,9 +17,12 @@ import { CreateView } from "@/components/refine-ui/views/create-view";
 import { Breadcrumb } from "@/components/refine-ui/layout/breadcrumb";
 
 import { Textarea } from "@/components/ui/textarea";
-import { useBack } from "@refinedev/core";
+import { useBack, useGetIdentity } from "@refinedev/core";
 import { Loader2 } from "lucide-react";
 import z from "zod";
+import { useNavigate } from "react-router";
+import { User } from "@/types";
+import { useEffect } from "react";
 
 
 const departmentCreateSchema = z.object({
@@ -32,6 +35,15 @@ type DepartmentFormValues = z.infer<typeof departmentCreateSchema>;
 
 const DepartmentsCreate = () => {
   const back = useBack();
+  const navigate = useNavigate();
+
+  const { data: currentUser, isLoading: isUserLoading } = useGetIdentity<User>();
+  
+    useEffect(() => {
+      if (!isUserLoading && currentUser?.role === "student") {
+        navigate("/departments");
+      }
+    }, [currentUser, isUserLoading, navigate]);
 
   const form = useForm({
     resolver: zodResolver(departmentCreateSchema),
@@ -61,6 +73,17 @@ const DepartmentsCreate = () => {
     }
   };
 
+
+  if (isUserLoading || currentUser?.role === "student") {
+      return (
+        <CreateView className="class-view">
+          <div className="flex items-center justify-center h-64">
+            <Loader2 className="h-8 w-8 animate-spin" />
+          </div>
+        </CreateView>
+      );
+    }
+  
 
   return (
     <CreateView className="class-view">

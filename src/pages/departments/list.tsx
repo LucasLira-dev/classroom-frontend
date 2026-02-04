@@ -5,6 +5,8 @@ import { Breadcrumb } from "@/components/refine-ui/layout/breadcrumb";
 import { ListView } from "@/components/refine-ui/views/list-view";
 import { Badge } from "@/components/ui/badge";
 import { Input } from "@/components/ui/input";
+import { User } from "@/types";
+import { useGetIdentity } from "@refinedev/core";
 import { useTable } from "@refinedev/react-table";
 import { ColumnDef } from "@tanstack/react-table";
 import { Search } from "lucide-react";
@@ -22,6 +24,8 @@ type DepartmentListItem = {
 export default function DepartmentsList() {
 
     const [searchQuery, setSearchQuery] = useState("");
+
+    const { data: currentUser } = useGetIdentity<User>();
 
     const departmentsColumns = useMemo<ColumnDef<DepartmentListItem>[]>(
         () => [
@@ -127,7 +131,11 @@ export default function DepartmentsList() {
                         onChange={(e)=> setSearchQuery(e.target.value)}
                     />
                     </div>
-                    <CreateButton resource="departments" />
+                    {
+                        currentUser?.role === 'teacher' && (
+                            <CreateButton resource="departments" />
+                        )
+                    }
                 </div>
             </div>
 

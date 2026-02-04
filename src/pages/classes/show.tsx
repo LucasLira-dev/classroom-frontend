@@ -199,6 +199,12 @@ export default function ClassesShow() {
                                 <p>{classDetails?.subject?.department?.description}</p>
                             </div>
                         </div>
+
+                        <div className="instructor">
+                            <Badge variant="outline" className="font-bold p-2 border-double">
+                                InviteCode: <span className="text-green-400">{classDetails?.inviteCode}</span>
+                            </Badge>
+                        </div>
                     </div>
                 </div>
 
