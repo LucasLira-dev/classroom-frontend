@@ -26,6 +26,9 @@ import {
 } from "@/components/ui/form";
 import z from "zod";
 
+import logo from "@/logo.png";
+
+
 
 const signInSchema = z.object({
   email: z.string().email("Invalid email address"),
@@ -70,7 +73,11 @@ export const SignInForm = () => {
         "min-h-svh"
       )}>
 
-      <Card className={cn("sm:w-[456px]", "p-12", "mt-6")}>
+      <div className="logo flex items-center justify-center">
+        <img src={logo} alt="Classroom" className="h-40 w-50"/>
+      </div>
+
+      <Card className={cn("sm:w-114", "p-12", "mt-6")}>
         <CardHeader className={cn("px-0")}>
           <CardTitle
             className={cn(

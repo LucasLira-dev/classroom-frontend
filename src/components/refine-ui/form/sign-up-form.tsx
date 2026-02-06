@@ -24,6 +24,7 @@ import z from "zod";
 import { useForm } from "react-hook-form";
 import { ROLE_OPTIONS } from "@/constants";
 import UploadWidget from "@/components/upload-widget";
+import logo from "@/logo.png"
 
 const registerSchema = z.object({
   email: z.string().email("Invalid email address"),
@@ -89,7 +90,9 @@ export const SignUpForm = () => {
 
   return (  
     <div className="sign-up">
-
+      <div className="logo flex items-center justify-center">
+        <img src={logo} alt="Classroom" className="h-40 w-50"/>
+      </div>
       <Card className="card">
         <CardHeader className="header">
           <CardTitle className="title">Register</CardTitle>
