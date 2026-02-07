@@ -24,6 +24,7 @@ import { Badge } from "@/components/ui/badge";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Separator } from "@/components/ui/separator";
 import type { Department, Subject, User } from "@/types";
+import { DashboardSkeleton } from "@/components/dashboard-skeleton";
 
 
 type ClassListItem = {
@@ -188,6 +189,9 @@ export default function Dashboard() {
     },
   ];
 
+  if (usersQuery.isLoading || usersQuery.error) {
+    return <DashboardSkeleton />
+  }
 
   return (
     <div className="space-y-6">
